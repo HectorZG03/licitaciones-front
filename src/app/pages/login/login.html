@@ -1,0 +1,31 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+
+  <div class="bg-white shadow-lg p-8 rounded-lg w-96">
+    <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Iniciar sesión</h2>
+
+    <input
+      class="w-full p-2 border border-gray-300 rounded mb-4"
+      placeholder="Usuario"
+      [(ngModel)]="username"
+    />
+
+    <input
+      class="w-full p-2 border border-gray-300 rounded mb-4"
+      type="password"
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+    />
+
+    <button
+      class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+      (click)="login()"
+    >
+      Ingresar
+    </button>
+
+    <p *ngIf="errorMessage" class="text-red-500 text-center mt-4">
+      {{ errorMessage }}
+    </p>
+  </div>
+
+</div>
