@@ -1,0 +1,88 @@
+<div>
+
+  <!-- Encabezado -->
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800">Proveedores</h2>
+      <p class="text-gray-500 text-sm mt-1">Gestión del padrón de proveedores</p>
+    </div>
+    <button (click)="nuevo()"
+      class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition">
+      + Nuevo proveedor
+    </button>
+  </div>
+
+  <!-- Error -->
+  @if (errorMsg) {
+    <div class="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+      ⚠ {{ errorMsg }}
+    </div>
+  }
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="flex justify-center py-16">
+      <div class="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  }
+
+  <!-- Tabla -->
+  @if (!loading) {
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+
+      <!-- Sin resultados -->
+      @if (proveedores.length === 0) {
+        <div class="text-center py-16 text-gray-400">
+          <div class="text-4xl mb-3">📋</div>
+          <p class="text-sm">No hay proveedores registrados.</p>
+          <button (click)="nuevo()" class="mt-4 text-blue-600 text-sm hover:underline">
+            Registrar el primero
+          </button>
+        </div>
+      }
+
+      <!-- Con datos -->
+      @if (proveedores.length > 0) {
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Nombre / Razón social</th>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">RFC</th>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Correo</th>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Municipio</th>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Estado</th>
+              <th class="px-5 py-3"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            @for (p of proveedores; track p.id) {
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-5 py-3 font-medium text-gray-800">
+                  {{ p.razonSocial || p.nombrePersonaFisica || '—' }}
+                </td>
+                <td class="px-5 py-3 text-gray-600 font-mono">{{ p.rfc }}</td>
+                <td class="px-5 py-3 text-gray-600">{{ p.correo }}</td>
+                <td class="px-5 py-3 text-gray-600">{{ p.domMunicipio }}</td>
+                <td class="px-5 py-3 text-gray-600">{{ p.domEstado }}</td>
+                <td class="px-5 py-3 text-right">
+                  <div class="flex items-center justify-end gap-2">
+                    <button (click)="editar(p.id!)"
+                      class="px-3 py-1 text-xs border border-gray-300 text-gray-600 rounded-md hover:bg-gray-100 transition">
+                      Editar
+                    </button>
+                    <button (click)="eliminar(p.id!)"
+                      class="px-3 py-1 text-xs border border-red-200 text-red-500 rounded-md hover:bg-red-50 transition">
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+
+    </div>
+  }
+
+</div>

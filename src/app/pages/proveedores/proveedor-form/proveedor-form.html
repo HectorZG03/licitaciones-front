@@ -1,0 +1,229 @@
+<div class="max-w-5xl mx-auto">
+
+  <!-- Encabezado -->
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">
+      {{ isEdit ? 'Editar proveedor' : 'Registrar proveedor' }}
+    </h2>
+    <p class="text-gray-500 text-sm mt-1">
+      Los campos marcados con <span class="text-red-500">*</span> son obligatorios.
+    </p>
+  </div>
+
+  <!-- Alertas -->
+  <div *ngIf="errorMsg" class="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+    ⚠ {{ errorMsg }}
+  </div>
+  <div *ngIf="successMsg" class="mb-4 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm">
+    ✓ {{ successMsg }}
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+    <!-- ── SECCIÓN 1: Datos generales ── -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b">
+        Datos generales
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div>
+          <label class="form-label">Nombre persona física</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.nombrePersonaFisica" name="nombrePersonaFisica" placeholder="Nombre completo" />
+        </div>
+
+        <div>
+          <label class="form-label">RFC <span class="text-red-500">*</span></label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.rfc" name="rfc" required placeholder="RFC123456789" />
+        </div>
+
+        <div>
+          <label class="form-label">Razón social</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.razonSocial" name="razonSocial" placeholder="Razón social" />
+        </div>
+
+        <div>
+          <label class="form-label">Teléfonos <span class="text-red-500">*</span></label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.telefonos" name="telefonos" required placeholder="55 1234 5678" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="form-label">Correo electrónico <span class="text-red-500">*</span></label>
+          <input class="form-input" type="email" [(ngModel)]="proveedor.correo" name="correo" required placeholder="correo@ejemplo.com" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SECCIÓN 2: Domicilio ── -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b">
+        Domicilio
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="md:col-span-2">
+          <label class="form-label">Calle y número <span class="text-red-500">*</span></label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.domCalleNumero" name="domCalleNumero" required placeholder="Av. Ejemplo 123" />
+        </div>
+
+        <div>
+          <label class="form-label">Colonia <span class="text-red-500">*</span></label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.domColonia" name="domColonia" required placeholder="Colonia" />
+        </div>
+
+        <div>
+          <label class="form-label">Municipio <span class="text-red-500">*</span></label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.domMunicipio" name="domMunicipio" required placeholder="Municipio" />
+        </div>
+
+        <div>
+          <label class="form-label">Código postal <span class="text-red-500">*</span></label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.domCp" name="domCp" required placeholder="76000" />
+        </div>
+
+        <div>
+          <label class="form-label">Estado <span class="text-red-500">*</span></label>
+          <select class="form-input" [(ngModel)]="proveedor.domEstado" name="domEstado" required>
+            <option value="">Selecciona un estado</option>
+            <option>Aguascalientes</option><option>Baja California</option><option>Baja California Sur</option>
+            <option>Campeche</option><option>Chiapas</option><option>Chihuahua</option>
+            <option>Ciudad de México</option><option>Coahuila</option><option>Colima</option>
+            <option>Durango</option><option>Estado de México</option><option>Guanajuato</option>
+            <option>Guerrero</option><option>Hidalgo</option><option>Jalisco</option>
+            <option>Michoacán</option><option>Morelos</option><option>Nayarit</option>
+            <option>Nuevo León</option><option>Oaxaca</option><option>Puebla</option>
+            <option>Querétaro</option><option>Quintana Roo</option><option>San Luis Potosí</option>
+            <option>Sinaloa</option><option>Sonora</option><option>Tabasco</option>
+            <option>Tamaulipas</option><option>Tlaxcala</option><option>Veracruz</option>
+            <option>Yucatán</option><option>Zacatecas</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SECCIÓN 3: Representante legal ── -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b">
+        Representante legal
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div>
+          <label class="form-label">Nombre</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.repLegalNombre" name="repLegalNombre" placeholder="Nombre del representante" />
+        </div>
+
+        <div>
+          <label class="form-label">Cargo</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.repLegalCargo" name="repLegalCargo" placeholder="Director General, etc." />
+        </div>
+
+        <div>
+          <label class="form-label">RFC</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.repLegalRfc" name="repLegalRfc" placeholder="RFC del representante" />
+        </div>
+
+        <div>
+          <label class="form-label">Domicilio</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.repLegalDomicilio" name="repLegalDomicilio" placeholder="Domicilio del representante" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SECCIÓN 4: Padrón de proveedores ── -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b">
+        Padrón de proveedores
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div>
+          <label class="form-label">Número de cédula</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.padronNumCedula" name="padronNumCedula" placeholder="Número de cédula" />
+        </div>
+
+        <div>
+          <label class="form-label">Vigencia</label>
+          <input class="form-input" type="date" [(ngModel)]="proveedor.padronVigencia" name="padronVigencia" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="form-label">Rubros</label>
+          <textarea class="form-input" rows="3" [(ngModel)]="proveedor.padronRubros" name="padronRubros" placeholder="Descripción de rubros..."></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SECCIÓN 5: Acta constitutiva ── -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b">
+        Acta constitutiva
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div>
+          <label class="form-label">Número de acta</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.actaNumero" name="actaNumero" placeholder="Número de acta" />
+        </div>
+
+        <div>
+          <label class="form-label">Fecha</label>
+          <input class="form-input" type="date" [(ngModel)]="proveedor.actaFecha" name="actaFecha" />
+        </div>
+
+        <div>
+          <label class="form-label">Nombre del notario</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.actaNotarioNombre" name="actaNotarioNombre" placeholder="Nombre del notario" />
+        </div>
+
+        <div>
+          <label class="form-label">Número de notaría</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.actaNotariaNumero" name="actaNotariaNumero" placeholder="Número de notaría" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SECCIÓN 6: Reformas y accionistas ── -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b">
+        Reformas y accionistas
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div>
+          <label class="form-label">Número de reformas</label>
+          <input class="form-input" type="text" [(ngModel)]="proveedor.reformasNumero" name="reformasNumero" placeholder="Número de reformas" />
+        </div>
+
+        <div>
+          <label class="form-label">Fecha de reformas</label>
+          <input class="form-input" type="date" [(ngModel)]="proveedor.reformasFecha" name="reformasFecha" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="form-label">Accionistas</label>
+          <textarea class="form-input" rows="3" [(ngModel)]="proveedor.accionistas" name="accionistas" placeholder="Nombre y porcentaje de accionistas..."></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Botones ── -->
+    <div class="flex justify-end gap-3 pb-8">
+      <button type="button" (click)="cancelar()"
+        class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition text-sm font-medium">
+        Cancelar
+      </button>
+      <button type="submit" [disabled]="loading || f.invalid"
+        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+        {{ loading ? 'Guardando...' : (isEdit ? 'Actualizar' : 'Registrar') }}
+      </button>
+    </div>
+
+  </form>
+</div>

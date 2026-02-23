@@ -1,50 +1,26 @@
-<div class="min-h-screen bg-gray-100">
+<div>
+  <h2 class="text-2xl font-bold text-gray-800 mb-2">Panel de Usuario</h2>
+  <p class="text-gray-500 mb-8">Consulta y seguimiento de licitaciones disponibles.</p>
 
-  <!-- Header -->
-  <header class="bg-white shadow px-8 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <span class="text-2xl font-bold text-purple-600">Licitaciones</span>
-      <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-        Usuario
-      </span>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <div class="bg-white rounded-xl shadow p-6 border-l-4 border-purple-500 hover:shadow-md transition">
+      <div class="text-3xl mb-3">🔍</div>
+      <h3 class="font-semibold text-gray-800 mb-1">Consultar Licitaciones</h3>
+      <p class="text-gray-500 text-sm">Revisa las licitaciones activas disponibles.</p>
     </div>
-    <div class="flex items-center gap-4">
-      <span class="text-gray-500 text-sm">Hola, <strong class="text-gray-800">{{ username }}</strong></span>
-      <button
-        class="px-4 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition"
-        (click)="logout()"
-      >
-        Cerrar sesión
-      </button>
+
+    <div class="bg-white rounded-xl shadow p-6 border-l-4 border-pink-400 hover:shadow-md transition">
+      <div class="text-3xl mb-3">📄</div>
+      <h3 class="font-semibold text-gray-800 mb-1">Mis Solicitudes</h3>
+      <p class="text-gray-500 text-sm">Seguimiento del estado de tus solicitudes.</p>
     </div>
-  </header>
 
-  <!-- Contenido -->
-  <main class="max-w-5xl mx-auto px-6 py-10">
-    <h2 class="text-2xl font-bold text-gray-800 mb-2">Panel de Usuario</h2>
-    <p class="text-gray-500 mb-8">Consulta y seguimiento de licitaciones disponibles.</p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="bg-white rounded-xl shadow p-6 border-l-4 border-purple-500 hover:shadow-md transition">
-        <div class="text-3xl mb-3">🔍</div>
-        <h3 class="font-semibold text-gray-800 mb-1">Consultar Licitaciones</h3>
-        <p class="text-gray-500 text-sm">Revisa las licitaciones activas disponibles.</p>
-      </div>
-
-      <div class="bg-white rounded-xl shadow p-6 border-l-4 border-pink-400 hover:shadow-md transition">
-        <div class="text-3xl mb-3">📄</div>
-        <h3 class="font-semibold text-gray-800 mb-1">Mis Solicitudes</h3>
-        <p class="text-gray-500 text-sm">Seguimiento del estado de tus solicitudes.</p>
-      </div>
-
-      <div class="bg-white rounded-xl shadow p-6 border-l-4 border-teal-400 hover:shadow-md transition">
-        <div class="text-3xl mb-3">🔔</div>
-        <h3 class="font-semibold text-gray-800 mb-1">Notificaciones</h3>
-        <p class="text-gray-500 text-sm">Alertas sobre licitaciones de tu interés.</p>
-      </div>
-
+    <div class="bg-white rounded-xl shadow p-6 border-l-4 border-teal-400 hover:shadow-md transition">
+      <div class="text-3xl mb-3">🔔</div>
+      <h3 class="font-semibold text-gray-800 mb-1">Notificaciones</h3>
+      <p class="text-gray-500 text-sm">Alertas sobre licitaciones de tu interés.</p>
     </div>
-  </main>
 
+  </div>
 </div>

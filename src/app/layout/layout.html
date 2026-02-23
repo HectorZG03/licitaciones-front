@@ -1,0 +1,74 @@
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">⬡</span>
+      <span class="brand-name">Licitaciones</span>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <!-- Inicio según rol -->
+      <a class="nav-item" [routerLink]="rol === 'MAESTRO' ? '/home-maestro' : '/home-usuario'" routerLinkActive="active">
+        <span class="nav-icon">🏠</span> Inicio
+      </a>
+
+      <!-- Ambos roles -->
+      <a class="nav-item" routerLink="/proveedores" routerLinkActive="active">
+        <span class="nav-icon">🏢</span> Proveedores
+      </a>
+
+      <!-- Solo MAESTRO -->
+      <ng-container *ngIf="rol === 'MAESTRO'">
+        <a class="nav-item" routerLink="/usuarios" routerLinkActive="active">
+          <span class="nav-icon">👥</span> Usuarios
+        </a>
+        <a class="nav-item" routerLink="/reportes" routerLinkActive="active">
+          <span class="nav-icon">📊</span> Reportes
+        </a>
+        <a class="nav-item" routerLink="/configuracion" routerLinkActive="active">
+          <span class="nav-icon">⚙️</span> Configuración
+        </a>
+      </ng-container>
+
+      <!-- Solo USUARIO -->
+      <ng-container *ngIf="rol === 'USUARIO'">
+        <a class="nav-item" routerLink="/solicitudes" routerLinkActive="active">
+          <span class="nav-icon">📄</span> Mis Solicitudes
+        </a>
+        <a class="nav-item" routerLink="/notificaciones" routerLinkActive="active">
+          <span class="nav-icon">🔔</span> Notificaciones
+        </a>
+      </ng-container>
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">{{ username.charAt(0).toUpperCase() }}</div>
+        <div class="user-details">
+          <span class="user-name">{{ username }}</span>
+          <span class="user-role">{{ rol }}</span>
+        </div>
+      </div>
+      <button class="btn-logout" (click)="logout()" title="Cerrar sesión">⏻</button>
+    </div>
+  </aside>
+
+  <!-- Área principal -->
+  <div class="main-area">
+    <header class="topbar">
+      <div class="topbar-role"
+        [class.badge-maestro]="rol === 'MAESTRO'"
+        [class.badge-usuario]="rol === 'USUARIO'">
+        {{ rol }}
+      </div>
+    </header>
+
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>
